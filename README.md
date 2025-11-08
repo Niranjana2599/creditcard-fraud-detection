@@ -18,7 +18,7 @@ However, fraudulent transactions are very rare and often resemble legitimate one
 |-----|-------------|
 | **1. Data Exploration** | Studied class imbalance, feature distributions, correlations |
 | **2. Preprocessing** | Removed duplicates, scaled features, handled imbalance using SMOTE |
-| **3. Model Training** | Trained ML models including Logistic Regression, Random Forest, XGBoost, Gradient Boosting |
+| **3. Model Training** | Trained ML models including Logistic Regression, Random Forest, XGBoost|
 | **4. Evaluation** | Used Precision, Recall, F1 score, ROC-AUC, and AUPRC metrics |
 | **5. Threshold Tuning** | Improved fraud detection by adjusting decision threshold |
 
