@@ -5,6 +5,25 @@ The dataset is highly imbalanced, with fraud cases being extremely rare compared
 Therefore, special techniques such as **SMOTE oversampling**, **feature scaling**, and **threshold tuning** were used.
 
 ---
+## 📊 Dataset
+The dataset used for this project comes from Kaggle’s Credit Card Fraud Detection dataset.
+
+📌 **Download Here:**  
+https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+
+### Dataset Details:
+| Feature | Description |
+|--------|-------------|
+| **Time** | Seconds elapsed between each transaction and the first transaction |
+| **V1–V28** | PCA-transformed features to protect confidentiality |
+| **Amount** | Transaction amount |
+| **Class** | Target variable (0 = Genuine, 1 = Fraud) |
+
+The dataset is **highly imbalanced**:  
+- **Non-Fraud:** 284,315 (~99.8%)  
+- **Fraud:** 492 (~0.17%)
+
+---
 
 ## 🔍 Problem Statement
 Financial institutions must detect fraudulent transactions to prevent unauthorized charges.  
