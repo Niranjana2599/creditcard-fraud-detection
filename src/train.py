@@ -4,6 +4,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from xgboost import XGBClassifier
+import datetime
+
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -45,10 +47,15 @@ def train():
 
     # Save system
     system = {
-        "model": model,
-        "scaler": scaler,
-        "threshold": 0.50
+    "model": best_xgb,
+    "scaler": scaler,
+    "threshold": 0.50,
+    "metadata": {
+        "model_type": "XGBoost",
+        "trained_at": str(datetime.datetime.now()),
+        "version": "1.0.0"
     }
+}
 
     os.makedirs(MODEL_DIR, exist_ok=True)
     joblib.dump(system, MODEL_PATH)
