@@ -16,3 +16,9 @@ def home():
 @app.post("/predict", response_model=PredictResponse)
 def predict_fraud(request: PredictRequest):
     return predict(request.features, system)
+
+@app.get("/health")
+def health():
+    return {
+        "status": "healthy"
+    }
