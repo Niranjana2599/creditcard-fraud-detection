@@ -41,6 +41,7 @@ The trained model is deployed using:
 
 # 🏗 System Architecture
 
+```mermaid
 flowchart TD
     A[Client / User] -->|POST /predict| B[FastAPI Service]
     B --> C["Load Trained Model - XGBoost"]
@@ -52,7 +53,7 @@ flowchart TD
     B --> H[Health & Metadata Endpoints]
     B --> I[Docker Container]
     I --> J[Render Cloud Deployment]
-
+```
 ---
 
 # 📊 Dataset
