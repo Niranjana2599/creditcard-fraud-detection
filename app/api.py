@@ -22,3 +22,7 @@ def health():
     return {
         "status": "healthy"
     }
+
+@app.get("/metadata")
+def metadata():
+    return system.get("metadata", {})
