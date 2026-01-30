@@ -1,6 +1,8 @@
 from fastapi import FastAPI
+from fastapi.responses import Response
 from app.schema import PredictRequest, PredictResponse
 from app.utils import load_system, predict
+from prometheus_client import Counter, generate_latest
 import logging
 
 # --------------------------------------------------
@@ -17,11 +19,18 @@ logger = logging.getLogger(__name__)
 system = load_system()
 
 # --------------------------------------------------
-# Simple In-Memory Monitoring Counters
+# Prometheus Monitoring Counters
 # --------------------------------------------------
 
-prediction_count = 0
-fraud_count = 0
+prediction_counter = Counter(
+    "total_predictions",
+    "Total number of predictions made"
+)
+
+fraud_counter = Counter(
+    "fraud_predictions",
+    "Total number of fraud predictions"
+)
 
 # --------------------------------------------------
 # Routes
@@ -44,25 +53,24 @@ def metadata():
 
 @app.get("/metrics")
 def metrics():
-    return {
-        "total_predictions": prediction_count,
-        "fraud_predictions": fraud_count
-    }
+    """
+    Prometheus-compatible metrics endpoint
+    """
+    return Response(generate_latest(), media_type="text/plain")
 
 
 @app.post("/predict", response_model=PredictResponse)
 def predict_fraud(request: PredictRequest):
 
-    global prediction_count, fraud_count
-
     logger.info("Prediction request received")
 
     result = predict(request.features, system)
 
-    prediction_count += 1
+    # Increment Prometheus counters
+    prediction_counter.inc()
 
     if result["prediction"] == 1:
-        fraud_count += 1
+        fraud_counter.inc()
 
     logger.info(
         f"Model version: {system.get('metadata', {}).get('version')} | "
