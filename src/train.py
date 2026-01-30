@@ -6,8 +6,6 @@ from sklearn.preprocessing import StandardScaler
 from xgboost import XGBClassifier
 import datetime
 
-
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_PATH = os.path.join(BASE_DIR, "Dataset", "creditcard.csv")
 MODEL_DIR = os.path.join(BASE_DIR, "models")
@@ -45,17 +43,16 @@ def train():
 
     model.fit(X_train_scaled, y_train)
 
-    # Save system
     system = {
-    "model": best_xgb,
-    "scaler": scaler,
-    "threshold": 0.50,
-    "metadata": {
-        "model_type": "XGBoost",
-        "trained_at": str(datetime.datetime.now()),
-        "version": "1.0.0"
+        "model": model,
+        "scaler": scaler,
+        "threshold": 0.50,
+        "metadata": {
+            "model_type": "XGBoost",
+            "trained_at": str(datetime.datetime.now()),
+            "version": "1.0.0"
+        }
     }
-}
 
     os.makedirs(MODEL_DIR, exist_ok=True)
     joblib.dump(system, MODEL_PATH)
