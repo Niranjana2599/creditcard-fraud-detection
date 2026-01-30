@@ -41,19 +41,17 @@ The trained model is deployed using:
 
 # 🏗 System Architecture
 
-```mermaid
 flowchart TD
     A[Client / User] -->|POST /predict| B[FastAPI Service]
-    B --> C[Load Trained Model (XGBoost)]
-    C --> D[Preprocessing (Scaler)]
+    B --> C["Load Trained Model - XGBoost"]
+    C --> D[Preprocessing - StandardScaler]
     D --> E[Fraud Prediction]
     E --> B
-    B --> F[Prometheus Metrics]
+    B --> F[Metrics Monitoring]
     B --> G[Logging]
     B --> H[Health & Metadata Endpoints]
     B --> I[Docker Container]
     I --> J[Render Cloud Deployment]
-```
 
 ---
 
